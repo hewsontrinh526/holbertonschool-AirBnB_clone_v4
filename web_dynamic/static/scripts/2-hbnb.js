@@ -25,19 +25,20 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  const url = "http://0.0.0.0:5001/api/v1/status/";
+  const url = 'http://0.0.0.0:5001/api/v1/status/';
   fetch(url)
-  .then(response => {
-    return response.json();
-  })
-  .then(data => {
-    if (data.status === 'OK') {
-      document.querySelector('div#api_status').classList.add('available');
-    } else {
-      document.querySelector('div#api_status').classList.remove('available');
-    }
-  })
-  .catch(error => {
-    console.error(error);
-  })
+    .then(response => response.json())
+    .then(data => checkStatus(data))
+    .catch(error => console.log('Error:', error));
 });
+
+function checkStatus(data) {
+  console.log(data);
+  console.log(data.status);
+  const apiStatus = document.getElementById('api_status');
+  if (data.status === 'OK') {
+    apiStatus.classList.add('available');
+  } else {
+    apiStatus.classList.remove('available');
+  }
+}
