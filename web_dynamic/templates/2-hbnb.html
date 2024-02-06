@@ -15,7 +15,8 @@
   <body>
     <header>
       <div class="logo"></div>
-	  <div id="api_status" class="available"></div>
+	  <div id="api_status" class="{% if status == "OK": %}available{% endif %}">
+	<span style="display: none;">{{ status }}</span>
     </header>
     <div class="container">
       <section class="filters">
